@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	h1 #{artist} at #{venue} on #{eventDate}
+	- var obj = spotifyIds
+	for song in obj
+		li 
+			a(href="#{song.spotifyId}") #{song.name}
+	
+	h2 
+		a(href="#{playlistUrl}") Click here to play in Spotify

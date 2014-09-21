@@ -1,0 +1,7 @@
+extends layout
+
+block content
+	h1 #{name} setlists
+	for setlist in results
+		li 
+			a(href="/setlist/#{setlist.id}") #{setlist.venueName} on #{setlist.eventDate}

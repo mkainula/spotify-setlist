@@ -1,0 +1,8 @@
+extends layout
+
+block content
+	h1 Search setlists
+	form(id="searchCriteria", action="/search", method="post")
+		label(for="searchString") Artist name:
+		input(id="name",name="name",type="text",value="")
+		button(type="submit") Find setlists

@@ -16,7 +16,7 @@ exports.get_setlist = function(req, res) {
 
 		async.eachSeries(songs, function(songs, callbacks) { 
 			var songName = songs["@name"];
-			var spotifyApiUrl = "http://ws.spotify.com/search/1/track.json?q=" + songName;
+			var spotifyApiUrl = "http://ws.spotify.com/search/1/track.json?q=" + songName + " " + artist;
 			var spotifyApiUri = encodeURI(spotifyApiUrl);
 			var spotifyId = "error";
 			async.series([function(callback) {
@@ -27,8 +27,13 @@ exports.get_setlist = function(req, res) {
 				if(results != null && results != '') {
 					var parsed = JSON.parse(results || null);
 					if(parsed != null) {
-						spotifyId = parsed.tracks[0]["href"];
-						spotifyIds.push({ "name": songs["@name"], "spotifyId": spotifyId});
+						for(i in parsed.tracks) {
+							var track = parsed.tracks[i];
+							if(track.artists[i] != null && track.artists[i].name == artist) {
+								spotifyId = parsed.tracks[i]["href"];
+								spotifyIds.push({ "name": songs["@name"], "spotifyId": spotifyId});
+							}
+						}
 						callbacks(null);
 					}
 				}

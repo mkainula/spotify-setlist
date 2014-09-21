@@ -38,7 +38,7 @@ exports.get_setlist = function(req, res) {
 				}
 			});
 		}, function(err) { 
-			playlistUrl = "spotify:trackset:" + artist + "+on+" + eventDate + ":";
+			playlistUrl = "spotify:trackset:setlist:";
 			for(var i in spotifyIds) {
 				parts = spotifyIds[i]["spotifyId"].split(':');
 				playlistUrl = playlistUrl + "," + parts[2];
